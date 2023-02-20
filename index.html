@@ -12,44 +12,109 @@
 
 <body>
 
-    <div class="container, row, col-12, bg-primary">
-        <h2>Today</h2>
-        <ul>
-            <li>I am container 1</li>
-            <li>I am container 1</li>
-            <li>I am container 1</li>
-            <li>I am container 1</li>
-            <li>I am container 1</li>
-            <li>I am container 1</li>
-        </ul>
-        <p>Total tasks: 0</p>
-        </div>
+    <h1>To-do List</h1>
 
-    <div class="container, row, col-12, bg-info">
+    <div class="container bg-primary rounded-top">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h2 class="text-center">Today</h2>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+
+    <div class="container bg-primary">
+        <div class="row justify-content-center pb-3">
+                <input type="text" class="add-to-today" placeholder="what do you need to do?">
+                <label for="date-input" name="task-due-date">Due date</label>
+                <input type="datetime-local" class="add-to-today" id="date-input" placeholder="what do you need to do?">
+                <button type="button" class="btn btn-warning">Add</button>
+        </div>
+    </div>
+
+    <div class="container bg-primary rounded-bottom">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Priority level</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">optional/non-urgent</th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Total tasks: 0</p>
+    </div>
+    </div>
+
+    <div class="container bg-info rounded">
         <h2>This week</h2>
-        <ul>
-            <li>I am container 2</li>
-            <li>I am container 2</li>
-            <li>I am container 2</li>
-            <li>I am container 2</li>
-            <li>I am container 2</li>
-            <li>I am container 2</li>
-        </ul>
+        <input type="text" id="add-to-today" placeholder="what do you need to do?">
+        <button type="button" class="btn btn-primary">Add</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Priority level</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Doesn't matter</th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
         <p>Total tasks: 0</p>
-        </div>
+    </div>
 
-    <div class="container, row, col-12, bg-warning">
+    <div class="container bg-warning rounded">
         <h2>Future</h2>
-        <ul>
-            <li>I am container 3</li>
-            <li>I am container 3</li>
-            <li>I am container 3</li>
-            <li>I am container 3</li>
-            <li>I am container 3</li>
-            <li>I am container 3</li>
-        </ul>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Priority level</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Doesn't matter</th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
         <p>Total tasks: 0</p>
-        </div>
+    </div>
 
 
 
