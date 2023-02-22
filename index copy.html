@@ -26,12 +26,10 @@
 
     <div class="container bg-primary">
         <div class="row justify-content-center pb-3">
-            <input type="text" placeholder="what do you need to do?" id="task-text" required>
-            <label for="date-input" name="task-due-date" required>Due date</label>
-            <input type="datetime-local" id="date-input">
-            <input type="checkbox" id="important" value="Important">
-            <label for="is-important">Task is Important</label><br>
-            <div class="btn btn-info" id="add-button">Add</div>
+                <input type="text" placeholder="what do you need to do?" id="task-text" required>
+                <label for="date-input" name="task-due-date" required>Due date</label>
+                <input type="datetime-local" id="date-input">
+                <button type="button" class="btn btn-warning" id="add-button">Add</button>
         </div>
     </div>
 
@@ -39,46 +37,86 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col">Priority level</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Important?</th>
                 </tr>
             </thead>
-            <tbody id="today-table">
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">optional/non-urgent</th>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Total tasks: 0</p>
+    </div>
+    </div>
+
+    <div class="container bg-info rounded">
+        <h2>This week</h2>
+        <input type="text" id="add-to-today" placeholder="what do you need to do?">
+        <button type="button" class="btn btn-primary">Add</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Priority level</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Doesn't matter</th>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
         <p>Total tasks: 0</p>
     </div>
 
-    <div class="container bg-primary rounded-bottom">
+    <div class="container bg-warning rounded">
+        <h2>Future</h2>
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col">Priority level</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Important?</th>
                 </tr>
             </thead>
-            <tbody id="week-table">
+            <tbody>
+                <tr>
+                    <th scope="row">Urgent</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Fairly important</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">Doesn't matter</th>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
         <p>Total tasks: 0</p>
     </div>
 
-    <div class="container bg-primary rounded-bottom">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Description</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Important?</th>
-                </tr>
-            </thead>
-            <tbody id="future-table">
-            </tbody>
-        </table>
-        <p>Total tasks: 0</p>
-    </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
