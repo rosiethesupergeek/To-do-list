@@ -8,12 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addButton.addEventListener("click", createTask)
 })
 
-
-const date = new Date();
-const todayDay = date.getDate();
-const todayMonth = date.getMonth();
-const todayYear = date.getFullYear();
-
 let allTasks = [];
 let todaysTasks = [];
 let thisWeeksTasks = [];
@@ -36,51 +30,60 @@ function createTask() {
     putInTheTable();
 }
 
+function dayOfYear(year, month, day) {
+    let now = new Date();
+    let daysInMs = new Date(year, month - 1, day) - new Date(now.getFullYear(), 0, 0);
+    let oneDay = 1000 * 60 * 60 * 24;
+    let days = (daysInMs / oneDay);
+    return (days);
+}
+
 
 function putInTheTable() {
 
     let task = allTasks.slice(-1)[0];
-    var taskHtml = `<tr>
+
+    let taskDate = new Date(task.date);
+
+    let taskYear = taskDate.getFullYear();
+    let taskMonth = (taskDate.getMonth());
+    let taskDay = taskDate.getDate();
+
+    let now = new Date();
+    let todayYear = now.getFullYear();
+    let todayMonth = now.getMonth();
+    let todayDay = now.getDate();  
+
+    let a = dayOfYear(taskYear, taskMonth+1, taskDay);
+    let b = dayOfYear(todayYear, todayMonth+1, todayDay);
+    let differenceInDays = a-b;
+
+    let taskHtml = `<tr>
     <td>${task.task}</td>
     <td>${task.date}</td>
     <td>${task.taskImportant}</td>
     </tr>`;
-
-    let taskDate = new Date(task.date);
- 
-    let taskDay = taskDate.getDate();
-    let taskMonth = taskDate.getMonth();
-    let taskYear = taskDate.getFullYear();
 
     if (
         (todayDay == taskDay) &&
         (todayMonth == taskMonth) &&
         (todayYear == taskYear)
     ) {
-        alert('help me god');
         let tableBodyContents = document.getElementById("today-table").innerHTML;
         alert(tableBodyContents);
         tableBodyContents = tableBodyContents + taskHtml;
         document.getElementById("today-table").innerHTML = tableBodyContents;
+    } else if ( differenceInDays > 0 && differenceInDays < 8)
+        {
+        let tableBodyContents = document.getElementById("week-table").innerHTML;
+        tableBodyContents = tableBodyContents + taskHtml;
+        document.getElementById("week-table").innerHTML = tableBodyContents;
+    } else {
+        let tableBodyContents = document.getElementById("future-table").innerHTML;
+        tableBodyContents = tableBodyContents + taskHtml;
+        document.getElementById("future-table").innerHTML = tableBodyContents;
     }
 }
-
-
-
-
-//     alert(date);
-
-
-
-
-
-//     // This arrangement can be altered based on how we want the date's format to appear.
-//     let currentDate = `${day}-${month}-${year}`;
-//     console.log(currentDate); // "17-6-2022"
-
-//     document.getElementById("today-table").innerHTML = taskhtml;
-// }
-
 
 
 function changePriorityStatus() {
