@@ -9,15 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 let allTasks = [];
-let todaysTasks = [];
-let thisWeeksTasks = [];
-let futureTasks = [];
-
 
 /**Adds tasks to the list */
 function createTask() {
     let taskText = document.getElementById("task-text").value;
-    let taskDate = document.getElementById("date-input").value;
+    let taskDate = new Date(document.getElementById("date-input").value);
     let isImportant = document.getElementById('important').value;
 
     let newTask = {
@@ -27,63 +23,57 @@ function createTask() {
     }
 
     allTasks.push(newTask);
-    putInTheTable();
+    buildTaskLists();
 }
 
-function dayOfYear(year, month, day) {
+// function dayOfYear(year, month, day) {
+//     let now = new Date();
+//     let daysInMs = new Date(year, month - 1, day) - new Date(now.getFullYear(), 0, 0);
+//     let oneDay = 1000 * 60 * 60 * 24;
+//     let days = (daysInMs / oneDay);
+//     return (days);
+// }
+
+
+
+function buildTaskLists() {
+
+    let todayList = document.getElementById("today-table");
+    let nextWeekList = document.getElementById("week-table");
+    let futureList = document.getElementById("future-table");
+
+    todayList.innerHTML = "";
+    nextWeekList.innerHTML = "";
+    futureList.innerHTML = "";
+
     let now = new Date();
-    let daysInMs = new Date(year, month - 1, day) - new Date(now.getFullYear(), 0, 0);
-    let oneDay = 1000 * 60 * 60 * 24;
-    let days = (daysInMs / oneDay);
-    return (days);
-}
-
-
-function putInTheTable() {
-
-    let task = allTasks.slice(-1)[0];
-
-    let taskDate = new Date(task.date);
-
-    let taskYear = taskDate.getFullYear();
-    let taskMonth = (taskDate.getMonth());
-    let taskDay = taskDate.getDate();
-
-    let now = new Date();
-    let todayYear = now.getFullYear();
-    let todayMonth = now.getMonth();
-    let todayDay = now.getDate();  
-
-    let a = dayOfYear(taskYear, taskMonth+1, taskDay);
-    let b = dayOfYear(todayYear, todayMonth+1, todayDay);
-    let differenceInDays = a-b;
-
-    let taskHtml = `<tr>
+    let endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59);
+    let oneWeekAhead = new Date(new Date().setDate(endOfToday.getDate() + 7));
+    oneWeekAhead = new Date(oneWeekAhead.setHours(23));
+    oneWeekAhead = new Date(oneWeekAhead.setMinutes(59));
+    
+        allTasks.forEach(function(task,i){
+        let taskHtml = `<tr>
     <td>${task.task}</td>
     <td>${task.date}</td>
     <td>${task.taskImportant}</td>
+    <button class="btn btn-info" onclick= "completeTask(${i})">Complete</button>
     </tr>`;
 
-    if (
-        (todayDay == taskDay) &&
-        (todayMonth == taskMonth) &&
-        (todayYear == taskYear)
-    ) {
-        let tableBodyContents = document.getElementById("today-table").innerHTML;
-        alert(tableBodyContents);
-        tableBodyContents = tableBodyContents + taskHtml;
-        document.getElementById("today-table").innerHTML = tableBodyContents;
-    } else if ( differenceInDays > 0 && differenceInDays < 8)
-        {
-        let tableBodyContents = document.getElementById("week-table").innerHTML;
-        tableBodyContents = tableBodyContents + taskHtml;
-        document.getElementById("week-table").innerHTML = tableBodyContents;
-    } else {
-        let tableBodyContents = document.getElementById("future-table").innerHTML;
-        tableBodyContents = tableBodyContents + taskHtml;
-        document.getElementById("future-table").innerHTML = tableBodyContents;
-    }
+        if (task.date<=endOfToday){
+            todayList.innerHTML+=taskHtml;
+        }
+        else if (task.date>endOfToday&&task.date<=oneWeekAhead)
+         {
+            nextWeekList.innerHTML+=taskHtml;
+        }
+        else {
+            futureList.innerHTML+=taskHtml;
+        }
+        // setUpCompleteButton(i);
+    })
 }
+
 
 
 function changePriorityStatus() {
@@ -93,9 +83,12 @@ function changePriorityStatus() {
 
 
 /**Edits each task */
-function editTask() {
-
+function completeTask(i) {
+    allTasks.splice(i,1);
+    buildTaskLists();
 }
+
+
 
 /**remove the task */
 function removeTask() {
