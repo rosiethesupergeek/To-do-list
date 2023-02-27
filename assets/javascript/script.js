@@ -5,7 +5,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     let addButton = document.getElementById("add-button");
 
-    addButton.addEventListener("click", createTask)
+    addButton.addEventListener("click", createTask);
+    load();
+    buildTaskLists();
+
 })
 
 let allTasks = [];
@@ -13,27 +16,24 @@ let allTasks = [];
 /**Adds tasks to the list */
 function createTask() {
     let taskText = document.getElementById("task-text").value;
-    let taskDate = new Date(document.getElementById("date-input").value);
-    let isImportant = document.getElementById('important').value;
+    let dateValue = document.getElementById("date-input").value;
 
+    if (taskText === "" || dateValue === "") {
+        alert("Task needs description, date and time!");
+        return
+    }
+
+    let taskDate = new Date(dateValue);
     let newTask = {
         task: taskText,
         date: taskDate,
-        taskImportant: isImportant
+        priorityStatus: "green"
     }
 
     allTasks.push(newTask);
     buildTaskLists();
+    save();
 }
-
-// function dayOfYear(year, month, day) {
-//     let now = new Date();
-//     let daysInMs = new Date(year, month - 1, day) - new Date(now.getFullYear(), 0, 0);
-//     let oneDay = 1000 * 60 * 60 * 24;
-//     let days = (daysInMs / oneDay);
-//     return (days);
-// }
-
 
 
 function buildTaskLists() {
@@ -51,46 +51,83 @@ function buildTaskLists() {
     let oneWeekAhead = new Date(new Date().setDate(endOfToday.getDate() + 7));
     oneWeekAhead = new Date(oneWeekAhead.setHours(23));
     oneWeekAhead = new Date(oneWeekAhead.setMinutes(59));
-    
-        allTasks.forEach(function(task,i){
-        let taskHtml = `<tr>
+
+
+    let todayCount = 0;
+    let thisWeekCount= 0;
+    let futureCount = 0;
+
+    for (i=0; i<allTasks.length; i++) {
+
+        let task = allTasks[i];
+
+        let className = "bg-success";
+        if (task.priorityStatus == "amber") {
+            className = "bg-warning"
+        } else if (task.priorityStatus == "red") {
+            className = "bg-danger"
+        }
+        let taskHtml = `<tr onclick= "changePriorityStatus(${i})" class="${className}">
     <td>${task.task}</td>
-    <td>${task.date}</td>
-    <td>${task.taskImportant}</td>
-    <button class="btn btn-info" onclick= "completeTask(${i})">Complete</button>
+    <td>${task.date.toLocaleDateString("en-GB")} ${task.date.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})}</td>
+    <td><button class="btn btn-info" onclick= "completeTask(${i});event.stopPropagation()">Complete</button></td>
     </tr>`;
 
-        if (task.date<=endOfToday){
-            todayList.innerHTML+=taskHtml;
+        if (task.date <= endOfToday) {
+            todayList.innerHTML += taskHtml;
+            todayCount ++;
+        } else if (task.date > endOfToday && task.date <= oneWeekAhead) {
+            nextWeekList.innerHTML += taskHtml;
+            thisWeekCount ++;
+        } else {
+            futureList.innerHTML += taskHtml;
+            futureCount ++;
         }
-        else if (task.date>endOfToday&&task.date<=oneWeekAhead)
-         {
-            nextWeekList.innerHTML+=taskHtml;
-        }
-        else {
-            futureList.innerHTML+=taskHtml;
-        }
-        // setUpCompleteButton(i);
-    })
+    }
+    document.getElementById("today-count").innerText= `Total tasks : ${todayCount}`;
+    document.getElementById("this-week-count").innerText = `Total tasks : ${thisWeekCount}`;
+    document.getElementById("future-count").innerText = `Total tasks : ${futureCount}`;
+
 }
 
 
 
-function changePriorityStatus() {
-
-}
-
-
-
-/**Edits each task */
-function completeTask(i) {
-    allTasks.splice(i,1);
+function changePriorityStatus(i) {
+    let task = allTasks[i];
+    if (task.priorityStatus == "green") {
+        task.priorityStatus = "amber";
+    } else if (task.priorityStatus == "amber") {
+        task.priorityStatus = "red";
+    } else {
+        task.priorityStatus = "green";
+    }
     buildTaskLists();
+    save();
+
 }
 
 
 
-/**remove the task */
-function removeTask() {
+/**Completes a task */
+function completeTask(i) {
 
+    allTasks.splice(i, 1);
+    buildTaskLists();
+    save();
+}
+
+
+/**retrieves from local storage */
+function load() {
+    let loadedTasks = localStorage.getItem("savedTasks");
+    allTasks = JSON.parse(loadedTasks);
+    for (let i = 0; i < allTasks.length; i++) {
+        allTasks[i].date = new Date(allTasks[i].date);
+    }
+}
+
+/**saves to local storage */
+function save() {
+    const tasksJSON = JSON.stringify(allTasks);
+    localStorage.setItem("savedTasks", tasksJSON);
 }
