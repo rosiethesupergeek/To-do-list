@@ -1,0 +1,15 @@
+.background-color {
+    background-color: #D7E0EB;
+}
+
+#task-text {
+    border-radius: 8px;
+}
+
+#date-input {
+    border-radius: 8px;
+}
+
+#add-button {
+    border-radius: 8px;
+}

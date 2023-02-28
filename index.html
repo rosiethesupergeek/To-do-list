@@ -8,35 +8,37 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
-<body>
+<body class="background-color">
 
-    <h1>To-do List</h1>
+    <h1 class="text-center pt-3 pb-3">To-dos</h1>
 
-    <div class="container bg-primary rounded-top">
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-                <h2 class="text-center">Today</h2>
-            </div>
-            <div class="col-4"></div>
+    <div class="container">
+        <div class="row justify-content-center pb-5">
+            <input type="text" placeholder="what do you need to do?" id="task-text" required class="mr-2">
+            <label for="date-input" name="task-due-date" required class="pl-3 pr-1">Due date:</label>
+            <input type="datetime-local" id="date-input">
+            <button class="btn btn-info mx-3" id="add-button">Add</button> 
         </div>
     </div>
 
-    <div class="container bg-primary">
-        <div class="row justify-content-center pb-3">
-            <input type="text" placeholder="what do you need to do?" id="task-text" required>
-            <label for="date-input" name="task-due-date" required>Due date</label>
-            <input type="datetime-local" id="date-input">
-            <button class="btn btn-info" id="add-button">Add</button>
+    <div class="container bg-info rounded-top">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h2 class="text-center pb-5 pt-3">Today</h2>
+            </div>
+            <div class="col-4"></div>
         </div>
     </div>
 
     <div class="container bg-primary rounded-bottom">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Description</th>
                     <th scope="col">Due Date</th>
                     <th scope="col"></th>
@@ -45,13 +47,23 @@
             <tbody id="today-table">
             </tbody>
         </table>
-        <p id="today-count">Total tasks: 0</p>
+        <p id="today-count" class="text-center pt-3">Total tasks: 0</p>
+    </div>
+
+    <div class="container bg-info rounded-top">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h2 class="text-center pb-5 pt-3">This week</h2>
+            </div>
+            <div class="col-4"></div>
+        </div>
     </div>
 
     <div class="container bg-primary rounded-bottom">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Description</th>
                     <th scope="col">Due Date</th>
                     <th scope="col"></th>
@@ -60,13 +72,23 @@
             <tbody id="week-table">
             </tbody>
         </table>
-        <p id="this-week-count">Total tasks: 0</p>
+        <p id="this-week-count" class="text-center pt-3">Total tasks: 0</p>
+    </div>
+
+    <div class="container bg-info rounded-top">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h2 class="text-center pb-5 pt-3">Future</h2>
+            </div>
+            <div class="col-4"></div>
+        </div>
     </div>
 
     <div class="container bg-primary rounded-bottom">
         <table class="table table-striped">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">Description</th>
                     <th scope="col">Due Date</th>
                     <th scope="col"></th>
@@ -75,7 +97,7 @@
             <tbody id="future-table">
             </tbody>
         </table>
-        <p id="future-count">Total tasks: 0</p>
+        <p id="future-count" class="text-center pt-3">Total tasks: 0</p>
     </div>
 
 
