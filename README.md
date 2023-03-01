@@ -11,19 +11,13 @@ Rosie's To Do List is a simple task storing website that allows you to record ta
 ## CONTENTS  
   
 * [UXD (User Experience Design)](#user-experience-ux)
-  * [User Stories](#user-stories) 
 * [Creation process (Strategy -> Surface)](#creation-process)
   * [Wireframes](#wireframes)
 * [Design](#design)
   * [Colour Scheme](#color-scheme)
 * [Page Features](#page-features)
-  * [Navbar](#navbar)
-  * [Hero-Image](#hero-image)
-  * [Tagline & Call to Action](#tagline--call-to-action)
-  * [Business Ethos](#business-ethos)
-  * [Menu Page](#menu-page)
-  * [Contact Page](#contact-page)
-  * [Footer](#footer)  
+  * [Add-Task-button](#Add-task-button)
+  * [Tables](#Tables)
 * [Tablet & Mobile View](#tablet--mobile-view)
   * [Desktop, Tablet & Mobile Differences](#desktop-tablet--mobile-differences)
   * [Tablet View](#tablet-view-ipad-miniipad-prosurface-pro)
@@ -46,8 +40,6 @@ Rosie's To Do List is a simple task storing website that allows you to record ta
 ---    
 
 ## User Experience (UX)  
-  
-### **User Stories**  
 
 ### **Primary Goal**  
   
@@ -267,4 +259,5 @@ For Desktop & Mobile
 - [NetNinja](https://netninja.dev/) for help in understanding Bootstrap grid system and javascript.
 
 ### **Acknowledgements** 
-- 
+- Thank you to Richey always.
+- Also to Kieran for explaining loads of stuff too.
