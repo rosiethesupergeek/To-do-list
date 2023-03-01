@@ -119,7 +119,12 @@ function completeTask(i) {
 
 /**retrieves from local storage */
 function load() {
+
+    
     let loadedTasks = localStorage.getItem("savedTasks");
+    if(loadedTasks == null) {
+        return;
+    }
     allTasks = JSON.parse(loadedTasks);
     for (let i = 0; i < allTasks.length; i++) {
         allTasks[i]["date"] = new Date(allTasks[i].date);
