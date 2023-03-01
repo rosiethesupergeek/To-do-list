@@ -11,24 +11,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })
 
-let allTasks = [];
+var allTasks = [];
 
 /**Adds tasks to the list */
 function createTask() {
     let taskText = document.getElementById("task-text").value;
     let dateValue = document.getElementById("date-input").value;
-
+    
     if (taskText === "" || dateValue === "") {
         alert("Task needs description, date and time!");
         return
     }
 
     let taskDate = new Date(dateValue);
+
     let newTask = {
         task: taskText,
         date: taskDate,
-        priorityStatus: "green"
-    }
+        priorityStatus: "green"};
 
     allTasks.push(newTask);
     buildTaskLists();
@@ -122,7 +122,7 @@ function load() {
     let loadedTasks = localStorage.getItem("savedTasks");
     allTasks = JSON.parse(loadedTasks);
     for (let i = 0; i < allTasks.length; i++) {
-        allTasks[i].date = new Date(allTasks[i].date);
+        allTasks[i]["date"] = new Date(allTasks[i].date);
     }
 }
 
